@@ -1,0 +1,52 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.order-book-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 50px;
+  font-family: Arial, sans-serif;
+}
+
+.quotes-container {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+.quotes-price-container {
+  flex: 1;
+}
+
+.quotes-size-container {
+  flex: 1;
+}
+
+.quotes-header-container {
+  display: flex;
+  gap: 10px;
+  color: lightblue;
+}
+
+.quotes-price-row {
+  display: flex;
+  justify-content: start;
+}
+
+.quotes-size-row {
+  display: flex;
+  justify-content: start;
+}
+
+.bid {
+  color: green;
+}
+
+.ask {
+  color: red;
+}

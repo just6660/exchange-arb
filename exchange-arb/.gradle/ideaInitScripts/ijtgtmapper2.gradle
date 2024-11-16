@@ -1,0 +1,8 @@
+ext.pathMapper = [:]
+ext.pathMapper.put('C:/Program Files/JetBrains/IntelliJ IDEA 2024.3/lib/external-system-rt.jar', '/mnt/c/Program Files/JetBrains/IntelliJ IDEA 2024.3/lib/external-system-rt.jar')
+ext.pathMapper.put('C:/Program Files/JetBrains/IntelliJ IDEA 2024.3/plugins/gradle/lib/gradle-tooling-extension-impl.jar', '/mnt/c/Program Files/JetBrains/IntelliJ IDEA 2024.3/plugins/gradle/lib/gradle-tooling-extension-impl.jar')
+ext.pathMapper.put('C:/Program Files/JetBrains/IntelliJ IDEA 2024.3/plugins/gradle/lib/gradle-tooling-extension-api.jar', '/mnt/c/Program Files/JetBrains/IntelliJ IDEA 2024.3/plugins/gradle/lib/gradle-tooling-extension-api.jar')
+ext.pathMapper.put('//wsl.localhost/Ubuntu/home/justin/.jdks/openjdk-23.0.1/bin/java', '/home/justin/.jdks/openjdk-23.0.1/bin/java')
+ext.pathMapper.put('//wsl.localhost/Ubuntu/home/justin/projects/hyperion', '/home/justin/projects/hyperion')
+ext.pathMapper.put("<<target java executable path>>", '/home/justin/.jdks/openjdk-23.0.1/bin/java')
+ext.mapPath = { path -> pathMapper.get(path) ?: path }
