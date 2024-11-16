@@ -3,3 +3,5 @@ server:
 logging:
   level:
     root: info
+  file:
+    path: test.log

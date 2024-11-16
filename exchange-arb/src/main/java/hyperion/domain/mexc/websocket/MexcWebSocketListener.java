@@ -28,19 +28,22 @@ public class MexcWebSocketListener extends okhttp3.WebSocketListener {
   public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
     try {
       DiffDepthUpdate diffDepthUpdate = objectMapper.readValue(text, DiffDepthUpdate.class);
+      orderBookService.checkSeqId("BTCUSDT", diffDepthUpdate.getD().getSeqID());
 
-      if (text.contains("bids")) {
+      if (diffDepthUpdate.getD().getBids() != null) {
         orderBookService.updateBuyOrder(
             diffDepthUpdate.getSymbol(),
-            diffDepthUpdate.getD().getQuote().getFirst().getPrice(),
-            diffDepthUpdate.getD().getQuote().getFirst().getQuantity(),
+            diffDepthUpdate.getD().getBids().getFirst().getPrice(),
+            diffDepthUpdate.getD().getBids().getFirst().getQuantity(),
             diffDepthUpdate.getTimestamp(),
             diffDepthUpdate.getD().getSeqID());
-      } else if (text.contains("asks")) {
+      }
+
+      if (diffDepthUpdate.getD().getAsks() != null) {
         orderBookService.updateSellOrder(
             diffDepthUpdate.getSymbol(),
-            diffDepthUpdate.getD().getQuote().getFirst().getPrice(),
-            diffDepthUpdate.getD().getQuote().getFirst().getQuantity(),
+            diffDepthUpdate.getD().getAsks().getFirst().getPrice(),
+            diffDepthUpdate.getD().getAsks().getFirst().getQuantity(),
             diffDepthUpdate.getTimestamp(),
             diffDepthUpdate.getD().getSeqID());
       }

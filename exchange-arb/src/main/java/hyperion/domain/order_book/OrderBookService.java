@@ -2,6 +2,8 @@ package hyperion.domain.order_book;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +13,7 @@ public class OrderBookService {
   private final Map<String, OrderBook> orderBooks;
 
   public OrderBookService() {
-    this.orderBooks = new HashMap<>();
+    this.orderBooks = new ConcurrentHashMap<>();
   }
 
   public void checkSeqId(String symbol, long seqId) {
@@ -24,7 +26,7 @@ public class OrderBookService {
     }
   }
 
-  public void updateBuyOrder(
+  public synchronized void updateBuyOrder(
       String symbol, double price, double quantity, long updateTimestamp, long seqId) {
     OrderBook orderBook = getOrCreateOrderBook(symbol);
     orderBook.setUpdateTimestamp(updateTimestamp);
@@ -32,7 +34,7 @@ public class OrderBookService {
     updateOrder(orderBook.getBids(), price, quantity, updateTimestamp, seqId);
   }
 
-  public void updateSellOrder(
+  public synchronized void updateSellOrder(
       String symbol, double price, double quantity, long updateTimestamp, long seqId) {
     OrderBook orderBook = getOrCreateOrderBook(symbol);
     orderBook.setUpdateTimestamp(updateTimestamp);

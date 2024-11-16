@@ -23,6 +23,7 @@ public class MexcController {
     try {
       return ResponseEntity.ok(mexcService.getOrderBookService().getOrderBooks());
     } catch (Exception e) {
+      log.error(e.getMessage());
       return ResponseEntity.status(500).body(null);
     }
   }

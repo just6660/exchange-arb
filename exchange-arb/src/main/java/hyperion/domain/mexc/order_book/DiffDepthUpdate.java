@@ -17,8 +17,8 @@ public class DiffDepthUpdate {
 
   @lombok.Data
   public static class Data {
-    @JsonAlias({"bids", "asks"})
-    private List<Quote> quote; // Quote
+    private List<Quote> bids;
+    private List<Quote> asks;
 
     private String e; // Channel name
 
