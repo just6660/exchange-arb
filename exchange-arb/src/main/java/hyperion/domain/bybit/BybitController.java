@@ -1,4 +1,4 @@
-package hyperion.domain.mexc;
+package hyperion.domain.bybit;
 
 import hyperion.domain.order_book.OrderBook;
 import java.util.Map;
@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/mexc")
+@RequestMapping("/bybit")
 @CrossOrigin(origins = "http://localhost:5173")
-public class MexcController {
-  private final MexcService mexcService;
+public class BybitController {
+  private final BybitService bybitService;
 
-  public MexcController(MexcService mexcService) {
-    this.mexcService = mexcService;
+  public BybitController(BybitService bybitService) {
+    this.bybitService = bybitService;
   }
 
   @GetMapping("/order-book")
   public ResponseEntity<Map<String, OrderBook>> getOrderBook() {
     try {
-      return ResponseEntity.ok(mexcService.getOrderBookService().getOrderBooks());
+      return ResponseEntity.ok(bybitService.getOrderBookService().getOrderBooks());
     } catch (Exception e) {
       log.error(e.getMessage());
       return ResponseEntity.status(500).body(null);

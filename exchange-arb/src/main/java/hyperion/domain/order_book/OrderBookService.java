@@ -1,9 +1,7 @@
 package hyperion.domain.order_book;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,18 +40,27 @@ public class OrderBookService {
     updateOrder(orderBook.getAsks(), price, quantity, updateTimestamp, seqId);
   }
 
-  public Map.Entry<Double, OrderLevel> getBestBuyOrder(String symbol) {
+  public Map.Entry<Double, OrderLevel> getBestBidOrder(String symbol) {
     OrderBook orderBook = orderBooks.get(symbol);
     return (orderBook == null || orderBook.getBids().isEmpty())
         ? null
         : orderBook.getBids().entrySet().iterator().next();
   }
 
-  public Map.Entry<Double, OrderLevel> getBestSellOrder(String symbol) {
+  public Map.Entry<Double, OrderLevel> getBestAskOrder(String symbol) {
     OrderBook orderBook = orderBooks.get(symbol);
     return (orderBook == null || orderBook.getAsks().isEmpty())
         ? null
         : orderBook.getAsks().entrySet().iterator().next();
+  }
+
+  public boolean isOrderBookInitialized(String symbol) {
+    OrderBook orderBook = orderBooks.get(symbol);
+    if (orderBook == null) {
+      return false;
+    }
+
+    return !orderBook.getBids().isEmpty() || !orderBook.getAsks().isEmpty();
   }
 
   public void clearOrderBook(String symbol) {
